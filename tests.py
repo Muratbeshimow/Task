@@ -1,8 +1,8 @@
 from classes import Task
 import random
 
-from functions import add_task, view_task
-from modules import remove_all_tasks
+from functions import add_task, find_task, remove_task, view_task
+from modules import save_task, load_tasks
 
 
 def create_job(num: int = 0):
@@ -59,6 +59,63 @@ def create_cleaning(num: int = 0):
         category = 'cleaning'
         add_task(Task(name=name, user=user, created_date=created_date,
                  completed_date=completed_date, task_info=task_info, category=category))
+
+
+# view_task()
+
+def update_task():
+    tasks = load_tasks()
+    user_input = input("Enter user name to update details: ")
+    print()
+    for task in tasks:
+        if task.user == user_input:
+            option = input(f"""
+What you want to update for contact: {task.user.capitalize()}
+
+1. Task Name  
+2. Task Category 
+3. Task info
+4. Change All
+
+             Choice: """)
+            print()
+            if option == '1':
+                task.name = input("New task name: ")
+                print("Task name updated")
+            elif option == '2':
+                task.category = input("New category name: ")
+                print("Category updated")
+            elif option == '3':
+                task.task_info = input("Enter task info: ")
+                print("Task info updated")
+            elif option == '4':
+                task.name = input("Task name: ")
+                task.user = input("Task user: ")
+                task.task_info = input("Task info: ")
+                task.category = input("Task category: ")
+                print("All details changed")
+            save_task(tasks)
+            break
+    else:
+        print("User not found.Please try again.")
+
+
+def find_task():
+    tasks = load_tasks()
+    name = input("Enter Task name or User name to find: ")
+    for task in tasks:
+        if task.name == name or task.user == name:
+            print(task)
+
+
+def remove_task(name="name"):
+    tasks = load_tasks()
+    name = input("Enter Task name or User name to remove: ")
+    for task in tasks.copy():
+        if task.name == name or task.user == name:
+            tasks.remove(task)
+            print("Task removed")
+    save_task(tasks)
 
 
 view_task()
