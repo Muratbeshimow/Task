@@ -1,8 +1,9 @@
+from atexit import register
 from classes import Task
-from functions import add_task, find_task, remove_task, update_task, view_task, find_category
+from functions import add_task, find_task, remove_task, update_task, view_task, find_category, register
 from modules import remove_all_tasks
 
-
+register()
 while True:
     option = input("""
 1. Add Task

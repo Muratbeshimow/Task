@@ -74,3 +74,22 @@ def remove_task(name="name"):
             tasks.remove(task)
             print("Task removed")
     save_task(tasks)
+
+
+def register():
+    class Task:
+        def __init__(self, name, user, task_info, category):
+            self.name = name
+            self.user = user
+            self.task_info = task_info
+            self.category = category
+
+    name = input("Enter Task name: ")
+    user = input("Enter User name: ")
+    task_info = input("Enter Task info: ")
+    category = input("Enter Task category: ")
+
+    new_task = Task(name=name, user=user,
+                    task_info=task_info, category=category)
+    add_task(new_task)
+    print("Task registered successfully!")

@@ -1,11 +1,11 @@
 from classes import Task
 import random
 
-from functions import add_task, find_task, remove_task, view_task
+from functions import add_task, find_task, view_task
 from modules import save_task, load_tasks
 
 
-def create_job(num: int = 0):
+def create_task(num: int = 0):
     for _ in range(num):
         name = random.choice(
             ['go to work', 'do a thing', 'do notes in work', 'make a project', 'take breakfast'])
@@ -18,50 +18,6 @@ def create_job(num: int = 0):
         add_task(Task(name=name, user=user, created_date=created_date,
                  completed_date=completed_date, task_info=task_info, category=category))
 
-
-def create_shop(num: int = 0):
-    for _ in range(num):
-        name = random.choice(
-            ['go to shop', 'buy a milk', 'buy a eggs', 'go to market', 'go buy coffe'])
-        user = random.choice(
-            ['mike', 'john', 'joe', 'richard', 'dani', 'hani', 'shani', '', 'hen', 'rafi'])
-        created_date = f"{random.randrange(1,31)}-{random.randrange(1,12)}-{random.randrange(2020,2023)}"
-        completed_date = f"{random.randrange(1,31)}-{random.randrange(1,12)}-{random.randrange(2020,2023)}"
-        task_info = random.choice(['aaaa', 'yyyy', 'iiii', 'ffff', 'bbbb'])
-        category = 'shop'
-        add_task(Task(name=name, user=user, created_date=created_date,
-                 completed_date=completed_date, task_info=task_info, category=category))
-
-
-def create_sport(num: int = 0):
-    for _ in range(num):
-        name = random.choice(
-            ['go to gym', 'do a thing', 'do a exersizes', 'go to walk', 'make a rest'])
-        user = random.choice(
-            ['avi', 'tal', 'gal', 'raz', 'haim', 'roni', 'shani', '', 'hen', 'rafi'])
-        created_date = f"{random.randrange(1,31)}-{random.randrange(1,12)}-{random.randrange(2020,2023)}"
-        completed_date = f"{random.randrange(1,31)}-{random.randrange(1,12)}-{random.randrange(2020,2023)}"
-        task_info = random.choice(['wwww', 'cccc', 'jjjj', 'gggg', 'bbbb'])
-        category = 'sport'
-        add_task(Task(name=name, user=user, created_date=created_date,
-                 completed_date=completed_date, task_info=task_info, category=category))
-
-
-def create_cleaning(num: int = 0):
-    for _ in range(num):
-        name = random.choice(
-            ['wash a car', 'clean the car', 'do a thing', 'clean the room', 'clean the bath'])
-        user = random.choice(
-            ['avi', 'tal', 'gal', 'raz', 'haim', 'roni', 'shani', '', 'hen', 'rafi'])
-        created_date = f"{random.randrange(1,31)}-{random.randrange(1,12)}-{random.randrange(2020,2023)}"
-        completed_date = f"{random.randrange(1,31)}-{random.randrange(1,12)}-{random.randrange(2020,2023)}"
-        task_info = random.choice(['wwww', 'cccc', 'jjjj', 'gggg', 'bbbb'])
-        category = 'cleaning'
-        add_task(Task(name=name, user=user, created_date=created_date,
-                 completed_date=completed_date, task_info=task_info, category=category))
-
-
-# view_task()
 
 def update_task():
     tasks = load_tasks()
@@ -100,12 +56,13 @@ What you want to update for contact: {task.user.capitalize()}
         print("User not found.Please try again.")
 
 
-def find_task():
+def find_task(name="name"):
     tasks = load_tasks()
-    name = input("Enter Task name or User name to find: ")
     for task in tasks:
-        if task.name == name or task.user == name:
-            print(task)
+        if task.name == name:
+            return task
+    else:
+        return print("not found")
 
 
 def remove_task(name="name"):
@@ -118,4 +75,12 @@ def remove_task(name="name"):
     save_task(tasks)
 
 
+# test_task = Task(name="test")
+# add_task(test_task)
+# found_task = find_task(test_task.name)
+# if find_task(test_task.name):
+#     print("Add test success")
+# else:
+#     print("Add test fail")
 view_task()
+# remove_task()
